@@ -22,8 +22,9 @@ while True:
 	for tweet in tweepy.Cursor(api.search,q = "I’m -filter:retweets lang:en",exclude_replies = True, tweet_mode='extended').items():
 		print('FULL TWEET '+tweet.full_text)
 		try:
-			phrase = re.split("I’m | I’M | i’m | im | Im | IM | I'm | I'M | i'm",tweet.full_text)[1]
-			phrase = 'Hi '+ phrase + ", I’m Dad"
+			phrase = tweet.full_text.encode()
+			phrase = re.split("im | Im | IM | I'm | I'M | i'm", phrase)[1]
+			phrase = 'Hi '+ phrase + ", I'm Dad"
 			print("Final phrase: "+phrase)
 		except:
 			break
