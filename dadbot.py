@@ -19,12 +19,10 @@ auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth)
 
 while True:
-	search = 'I’m'
-
-	for tweet in tweepy.Cursor(api.search,q = "'I’m -filter:retweets lang:en",exclude_replies = True, tweet_mode='extended').items():
+	for tweet in tweepy.Cursor(api.search,q = "I’m -filter:retweets lang:en",exclude_replies = True, tweet_mode='extended').items():
 		print('FULL TWEET '+tweet.full_text)
 		try:
-			phrase = re.split("I’m | I’M | i’m | im | Im | IM | I'm | I'M | i'm",api.get_status(tweet._json['id_str'], tweet_mode='extended')._json['full_text'])[1]
+			phrase = re.split("I’m | I’M | i’m | im | Im | IM | I'm | I'M | i'm",tweet.full_text)[1]
 			phrase = 'Hi '+ phrase + ", I’m Dad"
 			print("Final phrase: "+phrase)
 		except:
@@ -43,5 +41,3 @@ while True:
 			break
 
 		time.sleep(INTERVAL)
-
-
