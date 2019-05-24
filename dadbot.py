@@ -30,8 +30,7 @@ while True:
 		   print("shitter " + phrase)
 		   if any(s in phrase for s in a):
 			#tried re.split before, was hit or miss. going loco with this one
-		       test = phrase.replace("im", '`').replace("Im", '`').replace("IM", '`').replace("I'm", '`').replace("I'M", '`').replace("i'm", '`').split('`')
-		   else:
+		       test = phrase.replace("im ", '`').replace("Im ", '`').replace("IM ", '`').replace("I'm ", '`').replace("I'M ", '`').replace("i'm ", '`').split('`')		   else:
 		       phrase = ''
 		   print(test)
 		   test = filter(None, test)
