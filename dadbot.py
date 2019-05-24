@@ -43,7 +43,7 @@ while True:
 		phrase = 'Hi '+ phrase + ", I'm Dad"
 		print("Final phrase: "+phrase)
 
-		if phrase.strip():
+		if(len(phrase.strip()) != 0):
 		    try:
 		        tweetId = tweet.id
 		        username = tweet.user.screen_name
