@@ -17,31 +17,31 @@ auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth)
 a = ["I’m", "i’m",  "im",  "Im",  "IM",  "I'm",  "I'M",  "i'm"]
-test = "I'm so glad I don't fuck my followers. 😂 This shit finna get messy. Lmao."
 
 
 while True:
 	for tweet in tweepy.Cursor(api.search,q = "I'm -filter:retweets lang:en",exclude_replies = True, tweet_mode='extended').items():
 		print('FULL TWEET '+tweet.full_text)
+		phrase = ''#phrase will only get populated once "I'm" is found in the tweet
 		try:
-		   print("shit")
+		   print("inside try")
 		   test = tweet.full_text.replace('\n', ' ').encode('ascii', 'ignore').decode('ascii', 'ignore')
 		   phrase = unidecode.unidecode(test)
-		   print("shitter " + phrase)
+		   print("decoded phrase " + phrase)
 		   if any(s in phrase for s in a):
-			#tried re.split before, was hit or miss. going loco with this one
-		       test = phrase.replace("im ", '`').replace("Im ", '`').replace("IM ", '`').replace("I'm ", '`').replace("I'M ", '`').replace("i'm ", '`').split('`')		   else:
-		       phrase = ''
-		   print(test)
-		   test = filter(None, test)
-		   phrase = test[-1]
+		       print("inside if")
+			#tried re.split before but it was hit or miss
+		       test = phrase.replace("im ", '`').replace("Im ", '`').replace("IM ", '`').replace("I'm ", '`').replace("I'M ", '`').replace("i'm ", '`').split('`')
+		       print(test)
+		       test = filter(None, test)
+		       phrase = test[-1]
+		   print(phrase)
 		except:
 		    print("restart me")
 		    sys.exit()
-
 		phrase = 'Hi '+ phrase + ", I'm Dad"
 		print("Final phrase: "+phrase)
-
+		#check if phrase is empty
 		if(len(phrase.strip()) != 0):
 		    try:
 		        tweetId = tweet.id
